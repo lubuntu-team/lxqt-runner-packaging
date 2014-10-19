@@ -7,7 +7,7 @@ Build-Depends:
  debhelper (>= 9),
  libx11-dev,
  pkg-config,
- liblxqt-qt5-0-dev,
+ liblxqt-qt5-0-dev (>= 0.7.0),
  liblxqt-globalkeys-qt5-0-dev (>= 0.7.0),
  liblxqt-globalkeys-ui-qt5-0-dev (>= 0.7.0),
  libqt5x11extras5-dev (>= 5.3.1),
@@ -45,4 +45,4 @@ Depends:
 Description: LXQt program launcher (debug)
  Tool used to launch programs quickly by typing their names
  .
- This package contain debugging symbols.
+ This package contain the debugging symbols.
