@@ -34,7 +34,7 @@ namespace Ui {
     class Dialog;
 }
 
-namespace LxQt {
+namespace LXQt {
     class Settings;
     class PowerManager;
     class ScreenSaver;
@@ -69,20 +69,17 @@ protected:
 
 private:
     Ui::Dialog *ui;
-    LxQt::Settings *mSettings;
+    LXQt::Settings *mSettings;
     GlobalKeyShortcut::Action *mGlobalShortcut;
     CommandItemModel *mCommandItemModel;
     bool mShowOnTop;
     int mMonitor;
-    LxQt::PowerManager *mPowerManager;
-    LxQt::ScreenSaver *mScreenSaver;
+    LXQt::PowerManager *mPowerManager;
+    LXQt::ScreenSaver *mScreenSaver;
 
     bool mLockCascadeChanges;
 
     ConfigureDialog *mConfigureDialog;
-
-    //! \brief handle various additional behaviours (math only for now)
-    bool editEnterPressed();
 
 private slots:
     void realign();
@@ -93,6 +90,7 @@ private slots:
     void runCommand();
     void showConfigDialog();
     void shortcutChanged(const QString &oldShortcut, const QString &newShortcut);
+    void onActiveWindowChanged(WId id);
 };
 
 #endif // DIALOG_H

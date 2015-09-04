@@ -51,7 +51,7 @@
 #include <QWindow>
 #include <QScrollBar>
 
-#include <KF5/KWindowSystem/KWindowSystem>
+#include <KWindowSystem/KWindowSystem>
 
 #define DEFAULT_SHORTCUT "Alt+F2"
 
@@ -59,9 +59,9 @@
 
  ************************************************/
 Dialog::Dialog(QWidget *parent) :
-    QDialog(parent, Qt::Tool | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint),
+    QDialog(parent, Qt::Dialog | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint),
     ui(new Ui::Dialog),
-    mSettings(new LxQt::Settings("lxqt-runner", this)),
+    mSettings(new LXQt::Settings("lxqt-runner", this)),
     mGlobalShortcut(0),
     mLockCascadeChanges(false),
     mConfigureDialog(0)
@@ -70,7 +70,7 @@ Dialog::Dialog(QWidget *parent) :
     setWindowTitle("LXQt Runner");
     setAttribute(Qt::WA_TranslucentBackground);
 
-    connect(LxQt::Settings::globalSettings(), SIGNAL(iconThemeChanged()), this, SLOT(update()));
+    connect(LXQt::Settings::globalSettings(), SIGNAL(iconThemeChanged()), this, SLOT(update()));
     connect(ui->closeButton, SIGNAL(clicked()), this, SLOT(hide()));
     connect(mSettings, SIGNAL(settingsChanged()), this, SLOT(applySettings()));
 
@@ -87,7 +87,7 @@ Dialog::Dialog(QWidget *parent) :
     setFilter("");
     dataChanged();
 
-    ui->commandList->setItemDelegate(new LxQt::HtmlDelegate(QSize(32, 32), ui->commandList));
+    ui->commandList->setItemDelegate(new LXQt::HtmlDelegate(QSize(32, 32), ui->commandList));
 
     // Popup menu ...............................
     QAction *a = new QAction(XdgIcon::fromTheme("configure"), tr("Configure"), this);
@@ -98,9 +98,9 @@ Dialog::Dialog(QWidget *parent) :
     connect(a, SIGNAL(triggered()), mCommandItemModel, SLOT(clearHistory()));
     addAction(a);
 
-    mPowerManager = new LxQt::PowerManager(this);
+    mPowerManager = new LXQt::PowerManager(this);
     addActions(mPowerManager->availableActions());
-    mScreenSaver = new LxQt::ScreenSaver(this);
+    mScreenSaver = new LXQt::ScreenSaver(this);
     addActions(mScreenSaver->availableActions());
 
     setContextMenuPolicy(Qt::ActionsContextMenu);
@@ -108,7 +108,6 @@ Dialog::Dialog(QWidget *parent) :
     QMenu *menu = new QMenu(this);
     menu->addActions(actions());
     ui->actionButton->setMenu(menu);
-    ui->actionButton->setIcon(XdgIcon::fromTheme("configure"));
     // End of popup menu ........................
 
     applySettings();
@@ -117,6 +116,7 @@ Dialog::Dialog(QWidget *parent) :
     connect(QApplication::desktop(), SIGNAL(workAreaResized(int)), SLOT(realign()));
     connect(mGlobalShortcut, SIGNAL(activated()), this, SLOT(showHide()));
     connect(mGlobalShortcut, SIGNAL(shortcutChanged(QString,QString)), this, SLOT(shortcutChanged(QString,QString)));
+    connect(KWindowSystem::self(), SIGNAL(activeWindowChanged(WId)), this, SLOT(onActiveWindowChanged(WId)));
 
     resize(mSettings->value("dialog/width", 400).toInt(), size().height());
 
@@ -140,7 +140,7 @@ Dialog::~Dialog()
 void Dialog::closeEvent(QCloseEvent *event)
 {
     hide();
-    event->ignore();
+    event->accept();
 }
 
 
@@ -178,11 +178,6 @@ bool Dialog::eventFilter(QObject *object, QEvent *event)
 
         if (object == ui->commandList)
             return listKeyPressEvent(keyEvent);
-    }
-    else if (event->type() == QEvent::FocusOut)
-    {
-        hide();
-        return true;
     }
 
     return QDialog::eventFilter(object, event);
@@ -292,7 +287,9 @@ bool Dialog::listKeyPressEvent(QKeyEvent *event)
  ************************************************/
 void Dialog::showHide()
 {
-    if (isVisible() && isActiveWindow())
+    // Using KWindowSystem to detect the active window since
+    // QWidget::isActiveWindow is not working reliably.
+    if (isVisible() && (KWindowSystem::activeWindow() == winId()))
     {
         hide();
     }
@@ -378,16 +375,25 @@ void Dialog::shortcutChanged(const QString &/*oldShortcut*/, const QString &newS
 /************************************************
 
  ************************************************/
+void Dialog::onActiveWindowChanged(WId id)
+{
+    if (isVisible() && id != winId())
+        showHide();
+}
+
+
+/************************************************
+
+ ************************************************/
 void Dialog::setFilter(const QString &text, bool onlyHistory)
 {
-    qDebug() << "Ind i setFilter...";
     if (mCommandItemModel->isOutDated())
         mCommandItemModel->rebuild();
 
     QString trimmedText = text.simplified();
     mCommandItemModel->setCommand(trimmedText);
     mCommandItemModel->showOnlyHistory(onlyHistory);
-    mCommandItemModel->setFilterWildcard(trimmedText);
+    mCommandItemModel->setFilterRegExp(trimmedText);
     mCommandItemModel->sort(0);
 }
 

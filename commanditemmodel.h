@@ -8,7 +8,7 @@
  * Authors:
  *   Alexander Sokoloff <sokoloff.a@gmail.com>
  *
- * This program or library is free software; you can/ redistribute it
+ * This program or library is free software; you can redistribute it
  * and/or modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
@@ -51,7 +51,7 @@ public:
     void addHistoryCommand(const QString &command);
 
     QString command() const { return mCustomCommandProvider->command(); }
-    void setCommand(const QString &command); 
+    void setCommand(const QString &command);
 
     QPersistentModelIndex customCommandIndex() const { return mCustomCommandIndex; }
     QPersistentModelIndex externalProviderStartIndex() const { return mExternalProviderStartIndex; }

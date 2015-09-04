@@ -89,8 +89,18 @@ bool startProcess(QString command)
     QString program  = expandCommand(command, &args);
     if (program.isEmpty())
         return false;
+    if (QProcess::startDetached(program, args))
+    {
+        return true;
+    } else
+    {
+        //fallback for executable script with no #!
+        //trying as in system(2)
+        args.prepend(program);
+        args.prepend(QStringLiteral("-c"));
+        return QProcess::startDetached(QStringLiteral("/bin/sh"), args);
+    }
 
-    return QProcess::startDetached(program, args);
 }
 
 
@@ -230,11 +240,8 @@ bool AppLinkItem::compare(const QRegExp &regExp) const
     if (regExp.isEmpty())
         return false;
 
-    QRegExp re(regExp);
-
-    re.setCaseSensitivity(Qt::CaseInsensitive);
-    return mProgram.contains(re) ||
-           mTitle.contains(re) ;
+    return mProgram.contains(regExp) ||
+           mTitle.contains(regExp) ;
 }
 
 
@@ -255,7 +262,7 @@ AppLinkProvider::AppLinkProvider():
         mMenuCacheNotify = 0;
 #else
     mXdgMenu = new XdgMenu();
-    mXdgMenu->setEnvironments(QStringList() << "X-LXQT" << "LxQt");
+    mXdgMenu->setEnvironments(QStringList() << "X-LXQT" << "LXQt");
     connect(mXdgMenu, SIGNAL(changed()), this, SLOT(update()));
     mXdgMenu->read(XdgMenu::getMenuFileName());
     update();
@@ -355,7 +362,7 @@ void AppLinkProvider::update()
                 // Otherwise the copied item will have no icon.
                 // FIXME: this is a dirty hack and it should be made cleaner later.
                 if(item->icon().isNull())
-		    QMetaObject::invokeMethod(item, "updateIcon", Qt::QueuedConnection);
+                    QMetaObject::invokeMethod(item, "updateIcon", Qt::QueuedConnection);
                 delete newItem;
             }
             else
@@ -407,10 +414,7 @@ bool HistoryItem::run() const
  ************************************************/
 bool HistoryItem::compare(const QRegExp &regExp) const
 {
-    QRegExp re(regExp);
-
-    re.setCaseSensitivity(Qt::CaseSensitive);
-    return mCommand.contains(re);
+    return mCommand.contains(regExp);
 }
 
 
@@ -597,13 +601,13 @@ VirtualBoxItem::VirtualBoxItem(const QString & MachineName , const QIcon & Icon)
 
 void VirtualBoxItem::setRDEPort(const QString & portNum)
 {
-	m_rdePortNum = portNum;
+    m_rdePortNum = portNum;
 }
 
 bool VirtualBoxItem::run() const
 {
     QStringList arguments;
-#ifdef VBOXRUNNER_HEADLESS
+#ifdef VBOX_HEADLESS_ENABLED
     arguments << "-startvm" << title();
     return QProcess::startDetached ("VBoxHeadless" , arguments);
 #else
@@ -615,9 +619,7 @@ bool VirtualBoxItem::run() const
 
 bool VirtualBoxItem::compare(const QRegExp &regExp) const
 {
-    QRegExp re(regExp);
-    re.setCaseSensitivity(Qt::CaseInsensitive);
-    return (! regExp.isEmpty() && -1 != re.indexIn (title ()));
+    return (! regExp.isEmpty() && -1 != regExp.indexIn (title ()));
 }
 
 unsigned int VirtualBoxItem::rank(const QString &pattern) const
@@ -831,54 +833,6 @@ unsigned int MathItem::rank(const QString &pattern) const
 MathProvider::MathProvider()
 {
     append(new MathItem());
-}
-
-
-PowerProviderItem::PowerProviderItem(QAction *action)
-    : CommandProviderItem(),
-      m_action(action)
-{
-    mIcon = action->icon();
-    mTitle = action->text();
-    mComment = QObject::tr("Power Management");
-    mToolTip = mComment;
-}
-
-bool PowerProviderItem::run() const
-{
-    m_action->activate(QAction::Trigger);
-    return true;
-}
-
-bool PowerProviderItem::compare(const QRegExp &regExp) const
-{
-    if (regExp.isEmpty())
-        return false;
-
-    QRegExp re(regExp);
-
-    re.setCaseSensitivity(Qt::CaseInsensitive);
-    return mTitle.contains(re) ;
-}
-
-unsigned int PowerProviderItem::rank(const QString &pattern) const
-{
-    return stringRank(mTitle, pattern);
-}
-
-PowerProvider::PowerProvider() : CommandProvider()
-{
-    m_power = new LxQt::PowerManager(this);
-    foreach (QAction *a, m_power->availableActions())
-    {
-        append(new PowerProviderItem(a));
-    }
-
-    m_screensaver = new LxQt::ScreenSaver(this);
-    foreach (QAction *a, m_screensaver->availableActions())
-    {
-        append(new PowerProviderItem(a));
-    }
 }
 
 ExternalProviderItem::ExternalProviderItem()
