@@ -8,13 +8,13 @@ Build-Depends: cmake (>= 3.0.2),
                debhelper (>= 9),
                libx11-dev,
                libmenu-cache-dev,
-               pkg-config,
                libkf5windowsystem-dev,
                liblxqt0-dev,
-               liblxqt-globalkeys0-dev (>= 0.9.0),
-               liblxqt-globalkeys-ui0-dev (>= 0.9.0),
+               liblxqt-globalkeys0-dev,
+               liblxqt-globalkeys-ui0-dev,
                libqt5x11extras5-dev,
                libqt5xdg-dev,
+               pkg-config,
                qtbase5-private-dev,
                qtscript5-dev,
                qttools5-dev,
@@ -28,8 +28,6 @@ Package: lxqt-runner
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
-Breaks: lxqt-runner-qt5 (<< 0.9.0)
-Replaces: lxqt-runner-qt5 (<< 0.9.0)
 Description: LXQt program launcher
  Tool used to launch programs quickly by typing their names
  .
@@ -41,8 +39,6 @@ Section: debug
 Priority: extra
 Depends: ${misc:Depends},
          lxqt-runner (= ${binary:Version})
-Breaks: lxqt-runner-qt5-dbg (<< 0.9.0)
-Replaces: lxqt-runner-qt5-dbg (<< 0.9.0)
 Description: LXQt program launcher (debug)
  Tool used to launch programs quickly by typing their names
  .
