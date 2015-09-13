@@ -1,7 +1,7 @@
 Source: lxqt-runner
 Maintainer: LXQt Packaging Team <pkg-lxqt-devel@lists.alioth.debian.org>
 Uploaders: Alf Gaida <agaida@siduction.org>,
-           ChangZhuo Chen (陳昌倬) <czchen@gmail.com>
+           ChangZhuo Chen (陳昌倬) <czchen@debian.org>
 Section: x11
 Priority: optional
 Build-Depends: cmake (>= 3.0.2),
