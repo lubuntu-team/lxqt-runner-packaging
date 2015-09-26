@@ -1,13 +1,23 @@
-lxqt-runner (0.9.0+20150831-1) unstable; urgency=medium
+lxqt-runner (0.9.0+20150831-1) experimental; urgency=medium
 
+  [ Alf Gaida ]
   * Cherry-picked upstream version 0.9.0+20150831.
+  * Cleaned up debian/.gitignore
+  * Switched to experimental because of LXQt namespace change
+  * Added minimum version for liblxqt0-dev (>= 0.9.0+20150911)
+  * Changed mail address czchen
   * Added upstream signing key and use in watch file
-  * Fixed control with cme fix
-
- -- Alf Gaida <agaida@siduction.org>  Fri, 04 Sep 2015 21:24:25 +0200
-
-lxqt-runner (0.9.0-1) unstable; urgency=low
-
+  * Added lintian-override for missed manpage
+  * Added source/options
+  * Drop transitiona packages
+  * Append  -Wl,--as-needed on linker flags
+  * Fixed copyright to LGPL2.1+ only
+  * Added upstream signing key and use in watch file
+  * Beautified debian control
+  * Initial debian files
   * Initial release (Closes: #747613)
+
+  [ Andrew Lee (李健秋) ]
+  * Adding upstream version 0.9.0.
 
  -- Alf Gaida <agaida@siduction.org>  Sun, 15 Feb 2015 18:41:53 +0100
