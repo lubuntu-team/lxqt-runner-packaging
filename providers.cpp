@@ -57,7 +57,7 @@
 /************************************************
 
  ************************************************/
-QString expandCommand(const QString &command, QStringList *arguments=0)
+static QString expandCommand(const QString &command, QStringList *arguments=0)
 {
     QString program;
     wordexp_t words;
@@ -83,7 +83,35 @@ QString expandCommand(const QString &command, QStringList *arguments=0)
 /************************************************
 
  ************************************************/
-bool startProcess(QString command)
+static QString which(const QString &progName)
+{
+    if (progName.isEmpty())
+        return "";
+
+    if (progName.startsWith(QDir::separator()))
+    {
+        QFileInfo fileInfo(progName);
+        if (fileInfo.isExecutable() && fileInfo.isFile())
+            return fileInfo.absoluteFilePath();
+    }
+
+    QStringList dirs = QString(getenv("PATH")).split(":");
+
+    foreach (QString dir, dirs)
+    {
+        QFileInfo fileInfo(QDir(dir), progName);
+        if (fileInfo.isExecutable() && fileInfo.isFile())
+            return fileInfo.absoluteFilePath();
+    }
+
+    return "";
+}
+
+
+/************************************************
+
+ ************************************************/
+static bool startProcess(QString command)
 {
     QStringList args;
     QString program  = expandCommand(command, &args);
@@ -153,6 +181,7 @@ AppLinkItem::AppLinkItem(const QDomElement &element):
     mCommand = element.attribute("exec");
     mProgram = QFileInfo(element.attribute("exec")).baseName().section(" ", 0, 0);
     mDesktopFile = element.attribute("desktopFile");
+    initExec();
     QMetaObject::invokeMethod(this, "updateIcon", Qt::QueuedConnection);
 }
 
@@ -170,6 +199,7 @@ AppLinkItem::AppLinkItem(MenuCacheApp* app):
     char* path = menu_cache_item_get_file_path(MENU_CACHE_ITEM(app));
     mDesktopFile = QString::fromLocal8Bit(path);
     g_free(path);
+    initExec();
     QMetaObject::invokeMethod(this, "updateIcon", Qt::QueuedConnection);
     // qDebug() << "FOUND: " << mIconName << ", " << mCommand;
 }
@@ -201,6 +231,7 @@ void AppLinkItem::operator=(const AppLinkItem &other)
     mCommand = other.mCommand;
     mProgram = other.mProgram;
     mDesktopFile = other.mDesktopFile;
+    mExec = other.mExec;
 
     mIconName = other.mIconName;
     mIcon = other.icon();
@@ -245,6 +276,20 @@ bool AppLinkItem::compare(const QRegExp &regExp) const
 }
 
 
+/************************************************
+
+ ************************************************/
+void AppLinkItem::initExec()
+{
+    static const QRegExp split_re{QStringLiteral("\\s")};
+    XdgDesktopFile desktop;
+    if (desktop.load(mDesktopFile))
+    {
+        QStringList cmd = desktop.value(QStringLiteral("Exec")).toString().split(split_re);
+        if (0 < cmd.size())
+            mExec = which(expandCommand(cmd[0]));
+    }
+}
 
 
 /************************************************
@@ -506,43 +551,15 @@ CustomCommandItem::CustomCommandItem(CustomCommandProvider *provider):
 /************************************************
 
  ************************************************/
-QString which(const QString &progName)
-{
-    if (progName.isEmpty())
-        return "";
-
-    if (progName.startsWith(QDir::separator()))
-    {
-        QFileInfo fileInfo(progName);
-        if (fileInfo.isExecutable() && fileInfo.isFile())
-            return fileInfo.absoluteFilePath();
-    }
-
-    QStringList dirs = QString(getenv("PATH")).split(":");
-
-    foreach (QString dir, dirs)
-    {
-        QFileInfo fileInfo(QDir(dir), progName);
-        if (fileInfo.isExecutable() && fileInfo.isFile())
-            return fileInfo.absoluteFilePath();
-    }
-
-    return "";
-}
-
-
-/************************************************
-
- ************************************************/
 void CustomCommandItem::setCommand(const QString &command)
 {
     mCommand = command;
     mTitle = mCommand;
 
-    QString program  = which(expandCommand(command));
+    mExec = which(expandCommand(command));
 
-    if (!program.isEmpty())
-        mComment = QString("%1 %2").arg(program, command.section(' ', 1));
+    if (!mExec.isEmpty())
+        mComment = QString("%1 %2").arg(mExec, command.section(' ', 1));
     else
         mComment = "";
 
