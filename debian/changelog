@@ -1,3 +1,10 @@
+lxqt-runner (0.10.0-1) experimental; urgency=medium
+
+  * New upstream release.
+  * Update Vcs-* fields.
+
+ -- ChangZhuo Chen (陳昌倬) <czchen@debian.org>  Sat, 07 Nov 2015 12:11:59 +0800
+
 lxqt-runner (0.9.0+20151014-1) experimental; urgency=medium
 
   * Cherry-picked upstream version 0.9.0+20151014.
