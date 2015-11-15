@@ -1,3 +1,11 @@
+lxqt-runner (0.10.0-2) unstable; urgency=medium
+
+  * Merge to unstable.
+  * Update Vcs-* fields.
+  * Set liblxqt minimal version to 0.10.0.
+
+ -- ChangZhuo Chen (陳昌倬) <czchen@debian.org>  Sun, 15 Nov 2015 20:25:12 +0800
+
 lxqt-runner (0.10.0-1) experimental; urgency=medium
 
   * New upstream release.
