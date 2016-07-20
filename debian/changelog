@@ -1,3 +1,24 @@
+lxqt-runner (0.10.96~13-g95f335b-1) experimental; urgency=medium
+
+  * Cherry-picking upstream version 0.10.96~13-g95f335b.
+  * Preparing the upcoming release, switch to experimental
+  * Added new build dependendies:
+    - gcc (>= 4:6)
+    - g++ (>= 4:6) 
+    - libqt5xdgiconloader-dev (>= 1.3.1~)
+  * Added some minimum versions
+  * Bumped Standards to 3.9.8, no changes needed
+  * Fixed VCS fields, using https and plain /git/
+  * Added Recommends lxqt-runner-l10n
+  * Fixed copyrights Format field to https
+  * Fixed copyrights Source field to lxqt-runner
+  * Bumped years in copyrights
+  * Added translation control to rules
+  * Set CMAKE_BUILD_TYPE=RelWithDebInfo
+  * Exported LC_ALL=C.UTF-8, make builds reproducible 
+
+ -- Alf Gaida <agaida@siduction.org>  Wed, 20 Jul 2016 23:36:42 +0200
+
 lxqt-runner (0.10.0-3) unstable; urgency=medium
 
   *  Remove dbg package in favor of dbgsym. 

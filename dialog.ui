@@ -37,6 +37,9 @@
    </property>
    <item>
     <widget class="QFrame" name="panel">
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
@@ -86,6 +89,9 @@
         <property name="text">
          <string/>
         </property>
+        <property name="icon">
+         <iconset theme="go-down"/>
+        </property>
         <property name="popupMode">
          <enum>QToolButton::InstantPopup</enum>
         </property>
@@ -101,6 +107,9 @@
        <widget class="QToolButton" name="closeButton">
         <property name="text">
          <string notr="true">X</string>
+        </property>
+        <property name="icon">
+         <iconset theme="window-close"/>
         </property>
         <property name="autoRaise">
          <bool>true</bool>
