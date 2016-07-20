@@ -84,7 +84,7 @@ Dialog::Dialog(QWidget *parent) :
     ui->commandList->setModel(mCommandItemModel);
     ui->commandList->setEditTriggers(QAbstractItemView::NoEditTriggers);
     connect(ui->commandList, SIGNAL(clicked(QModelIndex)), this, SLOT(runCommand()));
-    setFilter("");
+    setFilter(QString());
     dataChanged();
 
     ui->commandList->setItemDelegate(new LXQt::HtmlDelegate(QSize(32, 32), ui->commandList));
@@ -216,7 +216,7 @@ bool Dialog::editKeyPressEvent(QKeyEvent *event)
             ui->commandList->currentIndex().row() == 0
            )
         {
-            setFilter("", false);
+            setFilter(QString(), false);
             return true;
         }
         qApp->sendEvent(ui->commandList, event);
@@ -228,10 +228,14 @@ bool Dialog::editKeyPressEvent(QKeyEvent *event)
             ui->commandList->isHidden()
            )
         {
-            setFilter("", true);
+            setFilter(QString(), true);
+
+            // set focus to the list so that it highlights the first item correctly,
+            // and then set it back to the textfield, where it belongs
+            ui->commandList->setFocus();
+            ui->commandEd->setFocus();
             return true;
         }
-
         qApp->sendEvent(ui->commandList, event);
         return true;
 
@@ -350,6 +354,8 @@ void Dialog::applySettings()
 
     mMonitor = mSettings->value("dialog/monitor", -1).toInt();
 
+    mCommandItemModel->showHistoryFirst(mSettings->value("dialog/history_first", true).toBool());
+
     realign();
     mSettings->sync();
 }
@@ -378,7 +384,7 @@ void Dialog::shortcutChanged(const QString &/*oldShortcut*/, const QString &newS
 void Dialog::onActiveWindowChanged(WId id)
 {
     if (isVisible() && id != winId())
-        showHide();
+        hide();
 }
 
 
@@ -394,7 +400,11 @@ void Dialog::setFilter(const QString &text, bool onlyHistory)
     mCommandItemModel->setCommand(trimmedText);
     mCommandItemModel->showOnlyHistory(onlyHistory);
     mCommandItemModel->setFilterRegExp(trimmedText);
-    mCommandItemModel->sort(0);
+    mCommandItemModel->invalidate();
+
+    // tidy up layout and select first item
+    ui->commandList->doItemsLayout();
+    ui->commandList->setCurrentIndex(mCommandItemModel->index(0, 0));
 }
 
 /************************************************
