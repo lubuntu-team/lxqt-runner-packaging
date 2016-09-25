@@ -1,3 +1,20 @@
+lxqt-runner (0.11.0-1) experimental; urgency=medium
+
+  * Cherry-picking upstream release 0.11.0.
+  * Added build dependency libmuparser-dev
+  * Added build dependency libqt5svg5-dev
+  * Bumped compat to 10
+  * Bumped minimum version debhelper (>= 10)
+  * Bumped minimum version libqtxdg-dev (>= 2.0.0)
+  * Bumped minimum version libqt5xdgiconloader-dev (>= 2.0.0)
+  * Bumped minimum version liblxqt0-dev (>= 0.11.0)
+  * Bumped minimum version liblxqt-globalkeys0-dev (>= 0.11.0),
+  * Bumped minimum version liblxqt-globalkeys-ui0-dev (>= 0.11.0),
+  * Removed build dependency qtscript5-dev
+  * Removed --parallel from rules, standard compat 10
+
+ -- Alf Gaida <agaida@siduction.org>  Mon, 26 Sep 2016 00:15:17 +0200
+
 lxqt-runner (0.10.96~13-g95f335b-1) experimental; urgency=medium
 
   * Cherry-picking upstream version 0.10.96~13-g95f335b.

@@ -789,17 +789,25 @@ bool VirtualBoxProvider::isOutDated() const
 
 
 #ifdef MATH_ENABLED
-#include <QtScript/QScriptEngine>
-#include <QtScript/QScriptValue>
+#include <muParser.h>
 
 /************************************************
 
  ************************************************/
 MathItem::MathItem():
-        CommandProviderItem()
+        CommandProviderItem(),
+        mParser{new mu::Parser}
 {
     mToolTip =QObject::tr("Mathematics");
     mIcon = XdgIcon::fromTheme("accessories-calculator");
+}
+
+
+/************************************************
+
+ ************************************************/
+MathItem::~MathItem()
+{
 }
 
 
@@ -819,17 +827,42 @@ bool MathItem::compare(const QRegExp &regExp) const
 {
     QString s = regExp.pattern().trimmed();
 
+    bool is_math = false;
+    if (s.startsWith('='))
+    {
+        is_math = true;
+        s.remove(0, 1);
+    }
     if (s.endsWith("="))
     {
+        is_math = true;
         s.chop(1);
-        QScriptEngine myEngine;
-        QScriptValue res = myEngine.evaluate(s);
-        if (res.isNumber())
+    }
+
+    if (is_math)
+    {
+        if (s != mCachedInput)
         {
-            MathItem *self=const_cast<MathItem*>(this);
-            self->mTitle = s + " = " + res.toString();
-            return true;
+            MathItem * self = const_cast<MathItem*>(this);
+            mCachedInput = s;
+            self->mTitle.clear();
+
+            //try to compute anything suitable
+            for (int attempts = 20; 0 < attempts && 0 < s.size(); s.chop(1), --attempts)
+            {
+                try
+                {
+                    mParser->SetExpr(s.toStdString());
+                    self->mTitle = s + "=" + QLocale::system().toString(mParser->Eval());
+                    break;
+                } catch (const mu::Parser::exception_type & e)
+                {
+                    //don't do anything, return false -> no result will be showed
+                }
+            }
         }
+
+        return !mTitle.isEmpty();
     }
 
     return false;
