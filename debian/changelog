@@ -1,3 +1,29 @@
+lxqt-runner (0.11.0-2) unstable; urgency=medium
+
+  * Cherry-picking upstream release 0.11.0.
+  * Bumped Standards to 3.9.8, no changes needed
+  * Bumped compat to 10
+  * Removed --parallel from rules, standard compat 10
+  * Bumped minimum version debhelper (>= 10)
+  * Bumped minimum version libqtxdg-dev (>= 2.0.0)
+  * Bumped minimum version liblxqt0-dev (>= 0.11.0)
+  * Bumped minimum version liblxqt-globalkeys0-dev (>= 0.11.0),
+  * Bumped minimum version liblxqt-globalkeys-ui0-dev (>= 0.11.0),
+  * Added build dependency libmuparser-dev
+  * Added build dependency libqt5svg5-dev
+  * Added build dependency libqt5xdgiconloader-dev (>= 2.0.0)
+  * Removed build dependency qtscript5-dev
+  * Added Recommends lxqt-runner-l10n
+  * Fixed VCS fields, using https and plain /git/
+  * Fixed copyrights Format field to https
+  * Fixed copyrights Source field to lxqt-runner
+  * Bumped years in copyrights
+  * Added translation control to rules
+  * Set CMAKE_BUILD_TYPE=RelWithDebInfo
+  * Exported LC_ALL=C.UTF-8, make builds reproducible 
+
+ -- Alf Gaida <agaida@siduction.org>  Wed, 20 Jul 2016 23:36:42 +0200
+
 lxqt-runner (0.10.0-3) unstable; urgency=medium
 
   *  Remove dbg package in favor of dbgsym. 

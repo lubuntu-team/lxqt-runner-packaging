@@ -63,7 +63,7 @@ static QString expandCommand(const QString &command, QStringList *arguments=0)
     wordexp_t words;
 
     if (wordexp(command.toLocal8Bit().data(), &words, 0) != 0)
-        return "";
+        return QString();
 
     char **w;
     w = words.we_wordv;
@@ -86,7 +86,7 @@ static QString expandCommand(const QString &command, QStringList *arguments=0)
 static QString which(const QString &progName)
 {
     if (progName.isEmpty())
-        return "";
+        return QString();
 
     if (progName.startsWith(QDir::separator()))
     {
@@ -95,16 +95,16 @@ static QString which(const QString &progName)
             return fileInfo.absoluteFilePath();
     }
 
-    QStringList dirs = QString(getenv("PATH")).split(":");
+    const QStringList dirs = QString(getenv("PATH")).split(":");
 
-    foreach (QString dir, dirs)
+    foreach (const QString &dir, dirs)
     {
         QFileInfo fileInfo(QDir(dir), progName);
         if (fileInfo.isExecutable() && fileInfo.isFile())
             return fileInfo.absoluteFilePath();
     }
 
-    return "";
+    return QString();
 }
 
 
@@ -347,7 +347,7 @@ void AppLinkProvider::menuCacheReloadNotify(MenuCache* cache, gpointer user_data
 
  void doUpdate(const QDomElement &xml, QHash<QString, AppLinkItem*> &items)
 {
-    DomElementIterator it(xml, "");
+    DomElementIterator it(xml, QString());
     while (it.hasNext())
     {
         QDomElement e = it.next();
@@ -561,7 +561,7 @@ void CustomCommandItem::setCommand(const QString &command)
     if (!mExec.isEmpty())
         mComment = QString("%1 %2").arg(mExec, command.section(' ', 1));
     else
-        mComment = "";
+        mComment = QString();
 
 }
 
@@ -789,17 +789,25 @@ bool VirtualBoxProvider::isOutDated() const
 
 
 #ifdef MATH_ENABLED
-#include <QtScript/QScriptEngine>
-#include <QtScript/QScriptValue>
+#include <muParser.h>
 
 /************************************************
 
  ************************************************/
 MathItem::MathItem():
-        CommandProviderItem()
+        CommandProviderItem(),
+        mParser{new mu::Parser}
 {
     mToolTip =QObject::tr("Mathematics");
     mIcon = XdgIcon::fromTheme("accessories-calculator");
+}
+
+
+/************************************************
+
+ ************************************************/
+MathItem::~MathItem()
+{
 }
 
 
@@ -819,17 +827,42 @@ bool MathItem::compare(const QRegExp &regExp) const
 {
     QString s = regExp.pattern().trimmed();
 
+    bool is_math = false;
+    if (s.startsWith('='))
+    {
+        is_math = true;
+        s.remove(0, 1);
+    }
     if (s.endsWith("="))
     {
+        is_math = true;
         s.chop(1);
-        QScriptEngine myEngine;
-        QScriptValue res = myEngine.evaluate(s);
-        if (res.isNumber())
+    }
+
+    if (is_math)
+    {
+        if (s != mCachedInput)
         {
-            MathItem *self=const_cast<MathItem*>(this);
-            self->mTitle = s + " = " + res.toString();
-            return true;
+            MathItem * self = const_cast<MathItem*>(this);
+            mCachedInput = s;
+            self->mTitle.clear();
+
+            //try to compute anything suitable
+            for (int attempts = 20; 0 < attempts && 0 < s.size(); s.chop(1), --attempts)
+            {
+                try
+                {
+                    mParser->SetExpr(s.toStdString());
+                    self->mTitle = s + "=" + QLocale::system().toString(mParser->Eval());
+                    break;
+                } catch (const mu::Parser::exception_type & e)
+                {
+                    //don't do anything, return false -> no result will be showed
+                }
+            }
         }
+
+        return !mTitle.isEmpty();
     }
 
     return false;
