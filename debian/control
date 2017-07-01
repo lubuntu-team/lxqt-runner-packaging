@@ -15,7 +15,7 @@ Build-Depends: debhelper (>= 10),
                libqt5x11extras5-dev,
                libx11-dev,
                qtbase5-private-dev
-Standards-Version: 3.9.8
+Standards-Version: 4.0.0
 Vcs-Browser: https://anonscm.debian.org/cgit/pkg-lxqt/lxqt-runner.git/?h=debian/sid
 Vcs-Git: https://anonscm.debian.org/git/pkg-lxqt/lxqt-runner.git -b debian/sid
 Homepage: https://github.com/lxde/lxqt-runner
@@ -24,7 +24,11 @@ Package: lxqt-runner
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
-Recommends: lxqt-runner-l10n
+Recommends: lxqt-runner-l10n,
+            lxqt-policykit,
+            lxqt-qtplugin,
+            lxqt-session
+Suggests: lxqt | lxqt-core
 Description: LXQt program launcher
  Tool used to launch programs quickly by typing their names
  .

@@ -1,3 +1,12 @@
+lxqt-runner (0.11.1-2) unstable; urgency=medium
+
+  * Bumped Standards to 4.0.0 - no changes needed
+  * Added to Recommends lxqt-policykit, lxqt-qtplugin, lxqt-session
+    (Closes: #866318)
+  * Added Suggests: lxqt | lxqt-core
+
+ -- Alf Gaida <agaida@siduction.org>  Sun, 02 Jul 2017 01:15:53 +0200
+
 lxqt-runner (0.11.1-1) unstable; urgency=medium
 
   * Cherry-picking upstream release 0.11.1.
