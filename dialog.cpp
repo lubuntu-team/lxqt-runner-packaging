@@ -80,7 +80,7 @@ Dialog::Dialog(QWidget *parent) :
     connect(ui->commandEd, SIGNAL(textChanged(QString)), this, SLOT(setFilter(QString)));
     connect(ui->commandEd, SIGNAL(returnPressed()), this, SLOT(runCommand()));
 
-    mCommandItemModel = new CommandItemModel(this);
+    mCommandItemModel = new CommandItemModel(mSettings->value("dialog/history_use", true).toBool(), this);
     ui->commandList->installEventFilter(this);
     ui->commandList->setModel(mCommandItemModel);
     ui->commandList->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -356,7 +356,9 @@ void Dialog::applySettings()
 
     mMonitor = mSettings->value("dialog/monitor", -1).toInt();
 
+    mCommandItemModel->setUseHistory(mSettings->value("dialog/history_use", true).toBool());
     mCommandItemModel->showHistoryFirst(mSettings->value("dialog/history_first", true).toBool());
+    ui->commandList->setShownCount(mSettings->value("dialog/list_shown_items", 4).toInt());
 
     realign();
     mSettings->sync();

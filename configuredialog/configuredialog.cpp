@@ -81,7 +81,9 @@ ConfigureDialog::ConfigureDialog(QSettings *settings, const QString &defaultShor
 
     settingsChanged();
 
-    connect(ui->historyCb, &QAbstractButton::toggled, [this] (bool checked) { mSettings->setValue("dialog/history_first", checked); });
+    connect(ui->historyUseCb, &QAbstractButton::toggled, [this] (bool checked) { mSettings->setValue("dialog/history_use", checked); });
+    connect(ui->historyFirstCb, &QAbstractButton::toggled, [this] (bool checked) { mSettings->setValue("dialog/history_first", checked); });
+    connect(ui->listShownItemsSB, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), [this] (int i) { mSettings->setValue("dialog/list_shown_items", i); });
 }
 
 
@@ -97,7 +99,11 @@ void ConfigureDialog::settingsChanged()
 
     ui->monitorCbx->setCurrentIndex(mSettings->value("dialog/monitor", -1).toInt() + 1);
     ui->shortcutEd->setText(mSettings->value("dialog/shortcut", "Alt+F2").toString());
-    ui->historyCb->setChecked(mSettings->value("dialog/history_first", true).toBool());
+    const bool history_use = mSettings->value("dialog/history_use", true).toBool();
+    ui->historyUseCb->setChecked(history_use);
+    ui->historyFirstCb->setChecked(mSettings->value("dialog/history_first", true).toBool());
+    ui->historyFirstCb->setEnabled(history_use);
+    ui->listShownItemsSB->setValue(mSettings->value("dialog/list_shown_items", 4).toInt());
 }
 
 
