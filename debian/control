@@ -29,6 +29,8 @@ Recommends: lxqt-runner-l10n,
             lxqt-qtplugin,
             lxqt-session
 Suggests: lxqt | lxqt-core
+Breaks: lxqt-common (<< 0.12.0)
+Replaces: lxqt-common (<< 0.12.0)
 Description: LXQt program launcher
  Tool used to launch programs quickly by typing their names
  .
