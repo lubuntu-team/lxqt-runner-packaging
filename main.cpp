@@ -27,6 +27,9 @@
 
 
 #include <LXQt/SingleApplication>
+
+#include <QCommandLineParser>
+
 #include "dialog.h"
 
 
@@ -34,6 +37,17 @@ int main(int argc, char *argv[])
 {
     LXQt::SingleApplication a(argc, argv);
     a.setQuitOnLastWindowClosed(false);
+    a.setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+
+    QCommandLineParser parser;
+    parser.setApplicationDescription(QStringLiteral("LXQt Runner"));
+    const QString VERINFO = QStringLiteral(LXQT_RUNNER_VERSION
+                                           "\nliblxqt   " LXQT_VERSION
+                                           "\nQt        " QT_VERSION_STR);
+    a.setApplicationVersion(VERINFO);
+    parser.addVersionOption();
+    parser.addHelpOption();
+    parser.process(a);
 
     QWidget hiddenPreviewParent{0, Qt::Tool};
     Dialog d(&hiddenPreviewParent);

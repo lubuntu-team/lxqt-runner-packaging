@@ -25,18 +25,23 @@ cmake_dependent_option(RUNNER_VBOX_HEADLESS
 find_package(KF5WindowSystem REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Xml REQUIRED)
-find_package(Qt5LinguistTools REQUIRED QUIET)
+find_package(Qt5LinguistTools REQUIRED)
 find_package(lxqt REQUIRED)
 find_package(lxqt-globalkeys REQUIRED)
 find_package(lxqt-globalkeys-ui REQUIRED)
-message(STATUS "Building with Qt${Qt5Core_VERSION_STRING}")
+message(STATUS "Building with Qt${Qt5Core_VERSION}")
 
 include(LXQtCompilerSettings NO_POLICY_SCOPE)
+
+# Patch Version
+set(LXQT_RUNNER_PATCH_VERSION 0)
+set(LXQT_RUNNER_VERSION ${LXQT_MAJOR_VERSION}.${LXQT_MINOR_VERSION}.${LXQT_RUNNER_PATCH_VERSION})
+add_definitions("-DLXQT_RUNNER_VERSION=\"${LXQT_RUNNER_VERSION}\"")
 
 set(QTX_LIBRARIES Qt5::Widgets Qt5::Xml)
 
 if (USE_MENU_CACHE OR RUNNER_MATH)
-    find_package(PkgConfig REQUIRED QUIET)
+    find_package(PkgConfig REQUIRED)
 endif ()
 
 if (USE_MENU_CACHE)
@@ -45,7 +50,7 @@ if (USE_MENU_CACHE)
 endif()
 
 if (RUNNER_MATH)
-    pkg_check_modules(MUPARSER REQUIRED QUIET muparser)
+    pkg_check_modules(MUPARSER REQUIRED muparser)
 endif ()
 
 set(lxqt-runner_H_FILES
@@ -148,3 +153,6 @@ install(TARGETS
     RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
     COMPONENT Runtime
 )
+
+# merged from lxqt-common
+add_subdirectory(autostart)
