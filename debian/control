@@ -6,18 +6,18 @@ Section: x11
 Priority: optional
 Build-Depends: debhelper (>= 10),
                libkf5windowsystem-dev,
-               liblxqt0-dev (>= 0.11.1),
-               liblxqt-globalkeys0-dev (>= 0.11.1),
-               liblxqt-globalkeys-ui0-dev (>= 0.11.1),
+               liblxqt0-dev (>= 0.12.0),
+               liblxqt-globalkeys0-dev (>= 0.12.0),
+               liblxqt-globalkeys-ui0-dev (>= 0.12.0),
                libmenu-cache-dev,
                libmuparser-dev,
                libqt5svg5-dev,
                libqt5x11extras5-dev,
                libx11-dev,
                qtbase5-private-dev
-Standards-Version: 4.0.0
-Vcs-Browser: https://anonscm.debian.org/cgit/pkg-lxqt/lxqt-runner.git/?h=debian/sid
-Vcs-Git: https://anonscm.debian.org/git/pkg-lxqt/lxqt-runner.git -b debian/sid
+Standards-Version: 4.1.1
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-lxqt/lxqt-runner.git/?h=debian/experimental
+Vcs-Git: https://anonscm.debian.org/git/pkg-lxqt/lxqt-runner.git -b debian/experimental
 Homepage: https://github.com/lxde/lxqt-runner
 
 Package: lxqt-runner
@@ -29,6 +29,8 @@ Recommends: lxqt-runner-l10n,
             lxqt-qtplugin,
             lxqt-session
 Suggests: lxqt | lxqt-core
+Breaks: lxqt-common (<< 0.12.0)
+Replaces: lxqt-common (<< 0.12.0)
 Description: LXQt program launcher
  Tool used to launch programs quickly by typing their names
  .
