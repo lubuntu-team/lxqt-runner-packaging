@@ -1,4 +1,4 @@
-lxqt-runner (0.12.0-6ubuntu1) UNRELEASED; urgency=medium
+lxqt-runner (0.12.0-6ubuntu1) cosmic; urgency=medium
 
   * Merge from Debian Sid. Remaining changes:
     - Cherry-pick an upstream commit:
@@ -7,7 +7,7 @@ lxqt-runner (0.12.0-6ubuntu1) UNRELEASED; urgency=medium
         * Upstream commit c47a674.
   * Change the Vcs entries to be Lubuntu-specific.
 
- -- Simon Quigley <tsimonq2@ubuntu.com>  Sun, 20 May 2018 23:54:38 -0500
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Mon, 21 May 2018 00:13:34 -0500
 
 lxqt-runner (0.12.0-6) unstable; urgency=medium
 
