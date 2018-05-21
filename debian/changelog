@@ -1,3 +1,23 @@
+lxqt-runner (0.12.0-6) unstable; urgency=medium
+
+  * Changed Source and watch to lxqt
+  * Bumped year in copyright
+
+ -- Alf Gaida <agaida@siduction.org>  Sat, 28 Apr 2018 16:21:12 +0200
+
+lxqt-runner (0.12.0-5) unstable; urgency=medium
+
+  * debian/rules USE_MENU_CACHE=OFF (Closes:#896513)
+  * Removed build dependency on libmenu-cache-dev
+  * Bumped debhelper to 11~
+  * Bumped compat to 11
+  * Bumped Standards to 4.1.4, no changes needed
+  * Fixed VCS fields for salsa
+  * Fixed homepage
+  * Removed trailing whitespaces from changelog
+
+ -- Alf Gaida <agaida@siduction.org>  Mon, 23 Apr 2018 20:08:15 +0200
+
 lxqt-runner (0.12.0-4ubuntu1) bionic; urgency=medium
 
   * Cherry-pick an upstream commit because the upstream release cycle is
@@ -12,7 +32,7 @@ lxqt-runner (0.12.0-4) unstable; urgency=medium
 
   * Bumped Standards to 4.1.2, no changes needed
   * Removed branch from VCS fields
-  * Removed debian/gbp.conf 
+  * Removed debian/gbp.conf
 
  -- Alf Gaida <agaida@siduction.org>  Thu, 14 Dec 2017 22:41:16 +0100
 
@@ -63,7 +83,7 @@ lxqt-runner (0.11.1-1) unstable; urgency=medium
   * Bumped some build-dependencies:
     - liblxqt0-dev (>= 0.11.1)
     - liblxqt-globalkeys0-dev (>= 0.11.1)
-    - liblxqt-globalkeys-ui0-dev (>= 0.11.1) 
+    - liblxqt-globalkeys-ui0-dev (>= 0.11.1)
   * Bump years in d/copyright
 
  -- Alf Gaida <agaida@siduction.org>  Mon, 02 Jan 2017 19:27:11 +0100
@@ -90,13 +110,13 @@ lxqt-runner (0.11.0-2) unstable; urgency=medium
   * Bumped years in copyrights
   * Added translation control to rules
   * Set CMAKE_BUILD_TYPE=RelWithDebInfo
-  * Exported LC_ALL=C.UTF-8, make builds reproducible 
+  * Exported LC_ALL=C.UTF-8, make builds reproducible
 
  -- Alf Gaida <agaida@siduction.org>  Wed, 20 Jul 2016 23:36:42 +0200
 
 lxqt-runner (0.10.0-3) unstable; urgency=medium
 
-  *  Remove dbg package in favor of dbgsym. 
+  *  Remove dbg package in favor of dbgsym.
 
  -- Alf Gaida <agaida@siduction.org>  Sat, 26 Dec 2015 23:04:25 +0100
 
