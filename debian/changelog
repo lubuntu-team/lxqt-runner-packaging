@@ -1,3 +1,13 @@
+lxqt-runner (0.12.0-6ubuntu1) UNRELEASED; urgency=medium
+
+  * Merge from Debian Sid. Remaining changes:
+    - Cherry-pick an upstream commit:
+      + AppLinkItem: Make genericName searchable.
+        * make-genericName-searchable.patch
+        * Upstream commit c47a674.
+
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Sun, 20 May 2018 23:54:38 -0500
+
 lxqt-runner (0.12.0-6) unstable; urgency=medium
 
   * Changed Source and watch to lxqt
