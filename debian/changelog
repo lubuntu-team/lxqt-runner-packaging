@@ -2,6 +2,7 @@ lxqt-runner (0.13.0-0ubuntu1) UNRELEASED; urgency=medium
 
   * New upstream release.
   * Update build dependencies.
+  * Remove patches applied upstream.
 
  -- Simon Quigley <tsimonq2@ubuntu.com>  Wed, 23 May 2018 22:31:54 -0500
 
