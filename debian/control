@@ -5,11 +5,11 @@ Uploaders: Alf Gaida <agaida@siduction.org>,
            ChangZhuo Chen (陳昌倬) <czchen@debian.org>
 Section: x11
 Priority: optional
-Build-Depends: debhelper (>= 11~),
+Build-Depends: debhelper (>= 11),
                libkf5windowsystem-dev,
-               liblxqt0-dev (>= 0.12.0),
-               liblxqt-globalkeys0-dev (>= 0.12.0),
-               liblxqt-globalkeys-ui0-dev (>= 0.12.0),
+               liblxqt0-dev (>= 0.13.0),
+               liblxqt-globalkeys0-dev (>= 0.13.0),
+               liblxqt-globalkeys-ui0-dev (>= 0.13.0),
                libmuparser-dev,
                libqt5svg5-dev,
                libqt5x11extras5-dev,
