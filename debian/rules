@@ -13,4 +13,5 @@ override_dh_auto_configure:
 		-DPULL_TRANSLATIONS=OFF \
 		-DUPDATE_TRANSLATIONS=OFF \
 		-DUSE_MENU_CACHE=OFF \
+                -DRUNNER_MATH=ON \
 		-DCMAKE_BUILD_TYPE=RelWithDebInfo

@@ -1,9 +1,51 @@
+lxqt-runner (0.14.1-1ubuntu1) focal; urgency=low
+
+  * Merge from Debian unstable.  Remaining changes:
+    - Using debhelper-compat.
+    - Bump miminum requirements in build deps.
+    - Updated manpages.
+    - Removed whitespace in debian/source/options.
+    - Added upstream metadata.
+    - keeping ubutu-side tweaks of writing some build deps in one line.
+    - Updated copyright.
+    - Updated debian/rules.
+
+ -- Raman Sarda <theloudspeaker@lubuntu.me>  Wed, 12 Feb 2020 11:43:52 +0530
+
+lxqt-runner (0.14.1-1) unstable; urgency=medium
+
+  * Cherry-picking new upstream version 0.14.1.
+  * Bumped minimum versions:
+    - liblxqt0-dev (>= 0.14.1~)
+    - liblxqt-globalkeys0-dev (>= 0.14.1~)
+    - liblxqt-globalkeys-ui0-dev (>= 0.14.1~)
+  * Improve the description for l10n a bit
+
+ -- Alf Gaida <agaida@siduction.org>  Mon, 25 Feb 2019 01:07:36 +0100
+
 lxqt-runner (0.14.1-0ubuntu1) disco; urgency=medium
 
   * New upstream release.
   * Run wrap-and-sort.
 
  -- Simon Quigley <tsimonq2@ubuntu.com>  Sat, 09 Mar 2019 13:29:08 -0600
+
+lxqt-runner (0.14.0-1) unstable; urgency=medium
+
+  * Cherry-picking new upstream version 0.14.0.
+  * Bumped Standards to 4.3.0, no changes needed
+  * Dropped d/compat, use debhelper-compat = 12, no changes needed
+  * Fixed years in d/copyright
+  * Bumped minimum versions:
+    - liblxqt0-dev (>= 0.14.0~)
+    - liblxqt-globalkeys0-dev (>= 0.14.0~)
+    - liblxqt-globalkeys-ui0-dev (>= 0.14.0~)
+  * Removed obsolete PULL_TRANSLATIONS= OFF from dh_auto_configure
+  * Added l10n-package, moved from lxqt-l10n
+  * Fixed d/manpages
+  * Added d/upstream/metadata
+
+ -- Alf Gaida <agaida@siduction.org>  Sun, 27 Jan 2019 23:37:58 +0100
 
 lxqt-runner (0.14.0-0ubuntu1) disco; urgency=medium
 
@@ -14,6 +56,18 @@ lxqt-runner (0.14.0-0ubuntu1) disco; urgency=medium
   * Add a lxqt-runner-l10n package.
 
  -- Simon Quigley <tsimonq2@ubuntu.com>  Sat, 26 Jan 2019 01:24:46 -0600
+
+lxqt-runner (0.13.0-1) unstable; urgency=medium
+
+  * Cherry-picking new upstream version 0.13.0.
+  * Bumped build dependencies:
+    - liblxqt0-dev to >= 0.13.0~
+    - liblxqt-globalkeys0-dev to >= 0.13.0~
+    - liblxqt-globalkeys-ui0-dev to >= 0.13.0~
+  * Removed not used build dependency qtbase5-private-dev
+  * Moved debian/.gitignore to ./.gitignore
+
+ -- Alf Gaida <agaida@siduction.org>  Fri, 25 May 2018 00:30:26 +0200
 
 lxqt-runner (0.13.0-0ubuntu1) cosmic; urgency=medium
 
@@ -201,3 +255,4 @@ lxqt-runner (0.9.0+20150831-1) experimental; urgency=medium
   * Adding upstream version 0.9.0.
 
  -- Alf Gaida <agaida@siduction.org>  Sun, 15 Feb 2015 18:41:53 +0100
+

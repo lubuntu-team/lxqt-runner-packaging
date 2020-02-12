@@ -5,11 +5,11 @@ Uploaders: Alf Gaida <agaida@siduction.org>,
            ChangZhuo Chen (陳昌倬) <czchen@debian.org>
 Section: x11
 Priority: optional
-Build-Depends: debhelper (>= 12),
+Build-Depends: debhelper-compat (= 12),
                libkf5windowsystem-dev,
-               liblxqt-globalkeys-ui0-dev (>= 0.14.0),
-               liblxqt-globalkeys0-dev (>= 0.14.0),
-               liblxqt0-dev (>= 0.14.0),
+               liblxqt0-dev (>= 0.14.1~),
+               liblxqt-globalkeys0-dev (>= 0.14.1~),
+               liblxqt-globalkeys-ui0-dev (>= 0.14.1~),
                libmuparser-dev,
                libqt5svg5-dev,
                libqt5x11extras5-dev,
@@ -30,7 +30,8 @@ Suggests: lxqt | lxqt-core
 Breaks: lxqt-common (<< 0.12.0)
 Replaces: lxqt-common (<< 0.12.0)
 Description: LXQt program launcher
- Tool used to launch programs quickly by typing their names
+ The LXQt runner provides a GUI that comes up on the desktop and allows for
+ launching applications, doing some math or shutting down the system.
  .
  This package contain LXQt runner.
 
@@ -42,4 +43,7 @@ Depends: qttranslations5-l10n, ${misc:Depends}
 Breaks: lxqt-runner (<< 0.11.0)
 Replaces: lxqt-runner (<< 0.11.0)
 Description: Language package for lxqt-runner
- This package contains the l10n files needed by lxqt-runner.
+ The LXQt runner provides a GUI that comes up on the desktop and allows for
+ launching applications, doing some math or shutting down the system.
+ .
+ This package contains the l10n files needed by the lxqt-runner.
