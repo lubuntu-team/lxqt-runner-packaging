@@ -7,9 +7,9 @@ Section: x11
 Priority: optional
 Build-Depends: debhelper-compat (= 12),
                libkf5windowsystem-dev,
-               liblxqt0-dev (>= 0.15.0),
-               liblxqt-globalkeys0-dev (>= 0.15.0),
                liblxqt-globalkeys-ui0-dev (>= 0.15.0),
+               liblxqt-globalkeys0-dev (>= 0.15.0),
+               liblxqt0-dev (>= 0.15.0),
                libmuparser-dev,
                libqt5svg5-dev,
                libqt5x11extras5-dev,
