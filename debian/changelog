@@ -1,4 +1,4 @@
-lxqt-runner (0.15.0-0ubuntu1) UNRELEASED; urgency=medium
+lxqt-runner (0.15.0-0ubuntu1) groovy; urgency=medium
 
   * New upstream release.
     - Update upstream signing key.
@@ -6,7 +6,7 @@ lxqt-runner (0.15.0-0ubuntu1) UNRELEASED; urgency=medium
   * Update Standards-version to 4.5.0, no changes needed.
   * Run wrap-and-sort.
 
- -- Simon Quigley <tsimonq2@ubuntu.com>  Thu, 30 Apr 2020 23:32:39 -0500
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Thu, 04 Jun 2020 14:35:17 -0500
 
 lxqt-runner (0.14.1-1ubuntu2) focal; urgency=medium
 
