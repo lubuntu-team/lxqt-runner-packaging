@@ -1,3 +1,16 @@
+lxqt-runner (0.17.0-0ubuntu1) impish; urgency=medium
+
+  * New upstream release 0.17.0
+  * Update debian/control
+    - Bump Standards-Version to 4.5.1
+    - Use liblxqt0-dev 0.17.0
+    - Use liblxqt-globalkeys0-dev 0.17.0
+    - Use liblxqt-globalkeys-ui0-dev 0.17.0
+  * Update debian/copyright
+  * Run wrap-and-sort
+
+ -- apt-ghetto <apt-ghetto@protonmail.com>  Mon, 16 Aug 2021 14:18:16 +0200
+
 lxqt-runner (0.16.0-1ubuntu1) hirsute; urgency=low
 
   [ Raman Sarda ]
