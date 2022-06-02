@@ -27,8 +27,6 @@ Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Recommends: lxqt-policykit, lxqt-qtplugin, lxqt-runner-l10n, lxqt-session
 Suggests: lxqt | lxqt-core
-Breaks: lxqt-common (<< 0.12.0)
-Replaces: lxqt-common (<< 0.12.0)
 Description: LXQt program launcher
  The LXQt runner provides a GUI that comes up on the desktop and allows for
  launching applications, doing some math or shutting down the system.
@@ -40,8 +38,6 @@ Architecture: all
 Multi-Arch: foreign
 Section: localization
 Depends: qttranslations5-l10n, ${misc:Depends}
-Breaks: lxqt-runner (<< 0.11.0)
-Replaces: lxqt-runner (<< 0.11.0)
 Description: Language package for lxqt-runner
  The LXQt runner provides a GUI that comes up on the desktop and allows for
  launching applications, doing some math or shutting down the system.
