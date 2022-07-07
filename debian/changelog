@@ -1,3 +1,9 @@
+lxqt-runner (1.1.0-0ubuntu2~ppa1) jammy; urgency=medium
+
+  * Backport to Jammy.
+
+ -- Aaron Rainbolt <arraybolt3@gmail.com>  Wed, 06 Jul 2022 23:56:39 -0500
+
 lxqt-runner (1.1.0-0ubuntu2) kinetic; urgency=medium
 
   * Backport upstream patches:
