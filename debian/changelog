@@ -1,3 +1,9 @@
+lxqt-runner (1.2.0-0ubuntu1~ppa1) jammy; urgency=medium
+
+  * Backport to Jammy.
+
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Fri, 18 Nov 2022 22:14:06 -0600
+
 lxqt-runner (1.2.0-0ubuntu1) lunar; urgency=medium
 
   * New upstream release.
