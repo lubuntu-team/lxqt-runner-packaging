@@ -15,7 +15,7 @@ Build-Depends: debhelper-compat (= 13),
                libqt5svg5-dev,
                libqt5x11extras5-dev,
                libx11-dev
-Standards-Version: 4.5.1
+Standards-Version: 4.6.1
 Vcs-Browser: https://phab.lubuntu.me/source/lxqt-runner/
 Vcs-Git: https://phab.lubuntu.me/source/lxqt-runner.git
 XS-Debian-Vcs-Browser: https://salsa.debian.org/lxqt-team/lxqt-runner
