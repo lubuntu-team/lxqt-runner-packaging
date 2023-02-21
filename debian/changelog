@@ -1,35 +1,62 @@
-lxqt-runner (1.2.0-1) unstable; urgency=medium
+lxqt-runner (1.2.0-1ubuntu1) lunar; urgency=medium
+
+  * Revert a sync from Debian.
+
+ -- Aaron Rainbolt <arraybolt3@ubuntu.com>  Tue, 21 Feb 2023 14:29:40 -0600
+
+lxqt-runner (1.2.0-0ubuntu1) lunar; urgency=medium
 
   * New upstream release.
-  * Bump Standards-Version to 4.6.1.
-    * Add Rules-Requires-Root: no
-  * Bump compat to 13.
-    * Remove unnecessary -Wl,--as-needed in d/rules
-    * Remove unnecessary --fail-missing in d/rules
-  * Update d/copyright.
-  * Update d/watch for GitHub.
-  * Fix d/upstream/metadata.
+  * Fix the watch file, for real this time.
+  * Bump build dependencies in debian/control.
+  * Bump Standards-version to 4.6.1, no changes needed.
+  * Lubuntuify the package slightly, to make debhelper happy.
+  * Remove reverse-applicable upstream patches.
+  * Less Rs.
 
- -- ChangZhuo Chen (陳昌倬) <czchen@debian.org>  Sat, 17 Dec 2022 14:03:05 +0800
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Fri, 18 Nov 2022 22:12:50 -0600
 
-lxqt-runner (1.1.0-2) unstable; urgency=medium
+lxqt-runner (1.1.0-0ubuntu2) kinetic; urgency=medium
 
-  * Merge to unstable.
+  * Backport upstream patches:
+    - https://github.com/lxqt/lxqt-runner/pull/221
+    - Force correct position after move from outside
+      + https://github.com/lxqt/lxqt-runner/commit/703db2
+    - Listen to KwindowSystem signals only when shown
+      + https://github.com/lxqt/lxqt-runner/commit/88a4d2
 
- -- ChangZhuo Chen (陳昌倬) <czchen@debian.org>  Sun, 20 Nov 2022 18:20:07 +0800
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Sat, 11 Jun 2022 14:27:52 -0400
 
-lxqt-runner (1.1.0-1) experimental; urgency=medium
+lxqt-runner (1.1.0-0ubuntu1) kinetic; urgency=medium
 
-  * Add debian/salsa-ci.yml file.
-  * Update debian/upstream/signing-key.asc.
-  * New upstream version 1.0.0
-  * New upstream version 1.1.0
-  * Build-deps on liblxqt1-dev (>= 1.1.0~).
-  * Build-deps on liblxqt-globalkeys1-dev (>= 1.1.0~).
-  * Build-deps on liblxqt-globalkeys-ui1-dev (>= 1.1.0~).
-  * Drop obsoleted Breaks and Replaces lines.
+  * New upstream release.
+  * Bumped build dependencies.
+  * Drop old Breaks/Replaces since we're past the LTS. Update the
+    runtime dependencies too.
 
- -- Andrew Lee (李健秋) <ajqlee@debian.org>  Fri, 15 Jul 2022 22:33:18 +0800
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Thu, 02 Jun 2022 12:43:41 -0500
+
+lxqt-runner (0.17.0-0ubuntu1) impish; urgency=medium
+
+  * New upstream release 0.17.0
+  * Update debian/control
+    - Bump Standards-Version to 4.5.1
+    - Use liblxqt0-dev 0.17.0
+    - Use liblxqt-globalkeys0-dev 0.17.0
+    - Use liblxqt-globalkeys-ui0-dev 0.17.0
+  * Update debian/copyright
+  * Run wrap-and-sort
+
+ -- apt-ghetto <apt-ghetto@protonmail.com>  Mon, 16 Aug 2021 14:18:16 +0200
+
+lxqt-runner (0.16.0-1ubuntu1) hirsute; urgency=low
+
+  [ Raman Sarda ]
+  * New upstream version. Merge from debian unstable.
+  * Tighten debhelper-compat requirement.
+  * Updated dependencies. Dropped qtbase5-priv-dev. Following upstream.
+
+ -- Raman Sarda <theloudspeaker@disroot.org>  Mon, 22 Feb 2021 02:02:03 +0530
 
 lxqt-runner (0.16.0-1) unstable; urgency=medium
 
@@ -42,6 +69,36 @@ lxqt-runner (0.16.0-1) unstable; urgency=medium
 
  -- Andrew Lee (李健秋) <ajqlee@debian.org>  Thu, 07 Jan 2021 15:31:23 +0800
 
+lxqt-runner (0.15.0-0ubuntu1) groovy; urgency=medium
+
+  * New upstream release.
+    - Update upstream signing key.
+    - Update LXQt build dependencies.
+  * Update Standards-version to 4.5.0, no changes needed.
+  * Run wrap-and-sort.
+
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Thu, 04 Jun 2020 14:35:17 -0500
+
+lxqt-runner (0.14.1-1ubuntu2) focal; urgency=medium
+
+  * Updated rules to match debian unstable.
+
+ -- Raman Sarda <theloudspeaker@lubuntu.me>  Sun, 16 Feb 2020 00:26:35 +0530
+
+lxqt-runner (0.14.1-1ubuntu1) focal; urgency=low
+
+  * Merge from Debian unstable.  Remaining changes:
+    - Using debhelper-compat.
+    - Bump miminum requirements in build deps.
+    - Updated manpages.
+    - Removed whitespace in debian/source/options.
+    - Added upstream metadata.
+    - keeping ubutu-side tweaks of writing some build deps in one line.
+    - Updated copyright.
+    - Updated debian/rules.
+
+ -- Raman Sarda <theloudspeaker@lubuntu.me>  Wed, 12 Feb 2020 11:43:52 +0530
+
 lxqt-runner (0.14.1-1) unstable; urgency=medium
 
   * Cherry-picking new upstream version 0.14.1.
@@ -52,6 +109,13 @@ lxqt-runner (0.14.1-1) unstable; urgency=medium
   * Improve the description for l10n a bit
 
  -- Alf Gaida <agaida@siduction.org>  Mon, 25 Feb 2019 01:07:36 +0100
+
+lxqt-runner (0.14.1-0ubuntu1) disco; urgency=medium
+
+  * New upstream release.
+  * Run wrap-and-sort.
+
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Sat, 09 Mar 2019 13:29:08 -0600
 
 lxqt-runner (0.14.0-1) unstable; urgency=medium
 
@@ -70,6 +134,16 @@ lxqt-runner (0.14.0-1) unstable; urgency=medium
 
  -- Alf Gaida <agaida@siduction.org>  Sun, 27 Jan 2019 23:37:58 +0100
 
+lxqt-runner (0.14.0-0ubuntu1) disco; urgency=medium
+
+  * New upstream release.
+    - Bump build dependencies.
+  * Bump Standards-version to 4.3.0, no changes needed.
+  * Bump debhelper compat to 12, no changes needed.
+  * Add a lxqt-runner-l10n package.
+
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Sat, 26 Jan 2019 01:24:46 -0600
+
 lxqt-runner (0.13.0-1) unstable; urgency=medium
 
   * Cherry-picking new upstream version 0.13.0.
@@ -81,6 +155,25 @@ lxqt-runner (0.13.0-1) unstable; urgency=medium
   * Moved debian/.gitignore to ./.gitignore
 
  -- Alf Gaida <agaida@siduction.org>  Fri, 25 May 2018 00:30:26 +0200
+
+lxqt-runner (0.13.0-0ubuntu1) cosmic; urgency=medium
+
+  * New upstream release.
+  * Update build dependencies.
+  * Remove patches applied upstream.
+
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Wed, 23 May 2018 22:41:57 -0500
+
+lxqt-runner (0.12.0-6ubuntu1) cosmic; urgency=medium
+
+  * Merge from Debian Sid. Remaining changes:
+    - Cherry-pick an upstream commit:
+      + AppLinkItem: Make genericName searchable.
+        * make-genericName-searchable.patch
+        * Upstream commit c47a674.
+  * Change the Vcs entries to be Lubuntu-specific.
+
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Mon, 21 May 2018 00:13:34 -0500
 
 lxqt-runner (0.12.0-6) unstable; urgency=medium
 
@@ -101,6 +194,16 @@ lxqt-runner (0.12.0-5) unstable; urgency=medium
   * Removed trailing whitespaces from changelog
 
  -- Alf Gaida <agaida@siduction.org>  Mon, 23 Apr 2018 20:08:15 +0200
+
+lxqt-runner (0.12.0-4ubuntu1) bionic; urgency=medium
+
+  * Cherry-pick an upstream commit because the upstream release cycle is
+    horribly slow:
+    - AppLinkItem: Make genericName searchable.
+      + make-genericName-searchable.patch
+      + Upstream commit c47a674.
+
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Mon, 05 Feb 2018 20:34:08 -0600
 
 lxqt-runner (0.12.0-4) unstable; urgency=medium
 
@@ -239,3 +342,4 @@ lxqt-runner (0.9.0+20150831-1) experimental; urgency=medium
   * Adding upstream version 0.9.0.
 
  -- Alf Gaida <agaida@siduction.org>  Sun, 15 Feb 2015 18:41:53 +0100
+
