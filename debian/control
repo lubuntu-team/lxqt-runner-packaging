@@ -1,6 +1,5 @@
 Source: lxqt-runner
-Maintainer: Lubuntu Developers <lubuntu-devel@lists.ubuntu.com>
-XSBC-Original-Maintainer: LXQt Packaging Team <pkg-lxqt-devel@lists.alioth.debian.org>
+Maintainer: LXQt Packaging Team <pkg-lxqt-devel@lists.alioth.debian.org>
 Uploaders: Alf Gaida <agaida@siduction.org>,
            Andrew Lee (李健秋) <ajqlee@debian.org>,
            ChangZhuo Chen (陳昌倬) <czchen@debian.org>
@@ -8,24 +7,27 @@ Section: x11
 Priority: optional
 Build-Depends: debhelper-compat (= 13),
                libkf5windowsystem-dev,
-               liblxqt-globalkeys-ui1-dev (>= 1.2.0),
-               liblxqt-globalkeys1-dev (>= 1.2.0),
-               liblxqt1-dev (>= 1.2.0),
+               liblxqt1-dev (>= 1.2.0~),
+               liblxqt-globalkeys1-dev (>= 1.2.0~),
+               liblxqt-globalkeys-ui1-dev (>= 1.2.0~),
                libmuparser-dev,
                libqt5svg5-dev,
                libqt5x11extras5-dev,
                libx11-dev
 Standards-Version: 4.6.1
-Vcs-Browser: https://git.lubuntu.me/Lubuntu/lxqt-runner-packaging
-Vcs-Git: https://git.lubuntu.me/Lubuntu/lxqt-runner-packaging.git
-XS-Debian-Vcs-Browser: https://salsa.debian.org/lxqt-team/lxqt-runner
-XS-Debian-Vcs-Git: https://salsa.debian.org/lxqt-team/lxqt-runner.git
+Vcs-Browser: https://salsa.debian.org/lxqt-team/lxqt-runner
+Vcs-Git: https://salsa.debian.org/lxqt-team/lxqt-runner.git
 Homepage: https://github.com/lxqt/lxqt-runner
+Rules-Requires-Root: no
 
 Package: lxqt-runner
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Recommends: lxqt-policykit, lxqt-qtplugin, lxqt-runner-l10n, lxqt-session
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: lxqt-runner-l10n,
+            lxqt-policykit,
+            lxqt-qtplugin,
+            lxqt-session
 Suggests: lxqt | lxqt-core
 Description: LXQt program launcher
  The LXQt runner provides a GUI that comes up on the desktop and allows for
@@ -37,7 +39,8 @@ Package: lxqt-runner-l10n
 Architecture: all
 Multi-Arch: foreign
 Section: localization
-Depends: qttranslations5-l10n, ${misc:Depends}
+Depends: ${misc:Depends},
+         qttranslations5-l10n
 Description: Language package for lxqt-runner
  The LXQt runner provides a GUI that comes up on the desktop and allows for
  launching applications, doing some math or shutting down the system.
