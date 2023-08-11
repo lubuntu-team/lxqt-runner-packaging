@@ -1,4 +1,4 @@
-lxqt-runner (1.3.0-0ubuntu1) UNRELEASED; urgency=medium
+lxqt-runner (1.3.0-0ubuntu1) mantic; urgency=medium
 
   * New upstream release.
   * Bump build dependencies.
@@ -7,7 +7,7 @@ lxqt-runner (1.3.0-0ubuntu1) UNRELEASED; urgency=medium
   * I guess we don't require root to build, do we?
   * Update copyright years.
 
- -- Simon Quigley <tsimonq2@ubuntu.com>  Fri, 11 Aug 2023 11:33:20 -0500
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Fri, 11 Aug 2023 12:50:19 -0500
 
 lxqt-runner (1.2.0-0ubuntu1) lunar; urgency=medium
 
