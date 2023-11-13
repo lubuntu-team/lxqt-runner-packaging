@@ -2,6 +2,7 @@ lxqt-runner (1.4.0-0ubuntu1) noble; urgency=medium
 
   * New upstream release.
   * Fix copyright file.
+  * Bump build dependency versions.
 
  -- Aaron Rainbolt <arraybolt3@gmail.com>  Mon, 13 Nov 2023 14:59:58 -0600
 
