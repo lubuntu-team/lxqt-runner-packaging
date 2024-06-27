@@ -7,14 +7,16 @@ Uploaders: Alf Gaida <agaida@siduction.org>,
 Section: x11
 Priority: optional
 Build-Depends: debhelper-compat (= 13),
-               libkf5windowsystem-dev,
-               liblxqt-globalkeys-ui1-dev (>= 1.4.0),
-               liblxqt-globalkeys1-dev (>= 1.4.0),
-               liblxqt1-dev (>= 1.4.0),
+               layer-shell-qt,
+               libkf6windowsystem-dev,
+               liblayershellqtinterface-dev,
+               liblxqt-globalkeys-ui2-dev (>= 2.0.0),
+               liblxqt-globalkeys2-dev (>= 2.0.0),
+               liblxqt2-dev (>= 2.0.0),
                libmuparser-dev,
-               libqt5svg5-dev,
-               libqt5x11extras5-dev,
-               libx11-dev
+               libx11-dev,
+               qt6-svg-dev,
+               qt6-wayland-dev
 Standards-Version: 4.7.0
 Vcs-Browser: https://git.lubuntu.me/Lubuntu/lxqt-runner-packaging
 Vcs-Git: https://git.lubuntu.me/Lubuntu/lxqt-runner-packaging.git
@@ -38,7 +40,7 @@ Package: lxqt-runner-l10n
 Architecture: all
 Multi-Arch: foreign
 Section: localization
-Depends: qttranslations5-l10n, ${misc:Depends}
+Depends: qt6-translations-l10n, ${misc:Depends}
 Description: Language package for lxqt-runner
  The LXQt runner provides a GUI that comes up on the desktop and allows for
  launching applications, doing some math or shutting down the system.
