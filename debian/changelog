@@ -1,3 +1,9 @@
+lxqt-runner (2.1.2-0ubuntu1) plucky; urgency=medium
+
+  * New upstream release.
+
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Tue, 04 Feb 2025 15:25:10 -0600
+
 lxqt-runner (2.1.1-0ubuntu1) plucky; urgency=medium
 
   * New upstream release.
