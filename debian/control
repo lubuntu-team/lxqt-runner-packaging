@@ -22,7 +22,6 @@ Vcs-Browser: https://git.lubuntu.me/Lubuntu/lxqt-runner-packaging
 Vcs-Git: https://git.lubuntu.me/Lubuntu/lxqt-runner-packaging.git
 Debian-Vcs-Browser: https://salsa.debian.org/lxqt-team/lxqt-runner
 Debian-Vcs-Git: https://salsa.debian.org/lxqt-team/lxqt-runner.git
-Rules-Requires-Root: no
 Homepage: https://github.com/lxqt/lxqt-runner
 
 Package: lxqt-runner
