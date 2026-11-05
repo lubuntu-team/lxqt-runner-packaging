@@ -5,7 +5,7 @@ Uploaders: Alf Gaida <agaida@siduction.org>,
            Andrew Lee (李健秋) <ajqlee@debian.org>,
            ChangZhuo Chen (陳昌倬) <czchen@debian.org>
 Section: x11
-Build-Depends: debhelper-compat (= 13),
+Build-Depends: debhelper-compat (= 14),
                layer-shell-qt (>= 6.0.0),
                libkf6windowsystem-dev (>= 6.0.0),
                liblayershellqtinterface-dev (>= 6.0.0),
@@ -25,7 +25,6 @@ Homepage: https://github.com/lxqt/lxqt-runner
 
 Package: lxqt-runner
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}
 Recommends: lxqt-policykit, lxqt-qtplugin, lxqt-runner-l10n, lxqt-session
 Suggests: lxqt | lxqt-core
 Description: LXQt program launcher
@@ -38,7 +37,7 @@ Package: lxqt-runner-l10n
 Architecture: all
 Multi-Arch: foreign
 Section: localization
-Depends: qt6-translations-l10n, ${misc:Depends}
+Depends: qt6-translations-l10n
 Description: Language package for lxqt-runner
  The LXQt runner provides a GUI that comes up on the desktop and allows for
  launching applications, doing some math or shutting down the system.
